@@ -1,66 +1,34 @@
-## Foundry
+# Bank and BankVault Smart Contracts
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This project contains two main smart contracts: Bank and BankVault, which together provide a system for users to deposit and withdraw ERC20 tokens.
 
-Foundry consists of:
+## Contracts
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+### Bank
 
-## Documentation
+The Bank contract is the main interface for users. It allows:
 
-https://book.getfoundry.sh/
+- Depositing ERC20 tokens
+- Withdrawing ERC20 tokens
+
+Key features:
+
+- Only the original depositor can withdraw their tokens
+- Uses OpenZeppelin's ReentrancyGuard for security
+
+### BankVault
+
+The BankVault contract is responsible for actually holding the tokens. It:
+
+- Receives tokens from users when they deposit
+- Sends tokens to users when they withdraw
+
+Key features:
+
+- Only the Bank contract (its owner) can initiate transfers
 
 ## Usage
 
-### Build
-
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+1. Deploy the Bank contract
+2. Use the `deposit` function to deposit ERC20 tokens
+3. Use the `withdraw` function to withdraw your deposited tokens

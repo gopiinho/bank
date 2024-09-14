@@ -6,9 +6,6 @@ import { Bank } from "../src/Bank.sol";
 import { BankVault } from "../src/BankVault.sol";
 
 contract DeployBank is Script {
-    address[] public tokenAddresses;
-    address[] public priceFeedAddresses;
-
     function run() external returns (Bank, BankVault) {
         vm.startBroadcast();
         Bank bank = new Bank();

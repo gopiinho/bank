@@ -17,7 +17,7 @@ contract BankVault is Ownable {
     }
 
     function transferToUser(address assetAddress, uint256 assetAmount, address user) public onlyOwner {
-        bool success = IERC20(assetAddress).transferFrom(address(this), user, assetAmount);
+        bool success = IERC20(assetAddress).transfer(user, assetAmount);
         if (!success) {
             revert Bank__TransferFailed();
         }
